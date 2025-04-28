@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Irradiance Forecasting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Solar Irradiance Forecasting</h1>
+
+        <!-- CNN Prediction Section -->
+        <section id="cnn-section">
+            <h2>Upload Image for CNN Prediction</h2>
+            <input type="file" id="cnn-file-input" accept="image/*" />
+            <button onclick="predictCNN()">Predict Irradiance</button>
+            <div id="cnn-result" class="result"></div>
+        </section>
+
+        <!-- LSTM Prediction Section -->
+        <section id="lstm-section">
+            <h2>Input Sequence for LSTM Prediction</h2>
+            <textarea id="lstm-input" placeholder="Enter comma-separated GSI values (e.g., 450,460,455,470)"></textarea>
+            <button onclick="predictLSTM()">Predict Irradiance</button>
+            <div id="lstm-result" class="result"></div>
+        </section>
+
+    </div>
+
+    <script>
+        // CNN Prediction
+        function predictCNN() {
+            const fileInput = document.getElementById('cnn-file-input');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please upload an image.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('cnn-result');
+                if (data.error) {
+                    resultDiv.innerHTML = `Error: ${data.error}`;
+                } else {
+                    resultDiv.innerHTML = `Predicted Irradiance: ${data.irradiance} ${data.units}`;
+                }
+            })
+            .catch(error => {
+                console.error("Error during CNN prediction:", error);
+            });
+        }
+
+        // LSTM Prediction
+        function predictLSTM() {
+            const sequence = document.getElementById('lstm-input').value.split(',').map(val => parseFloat(val.trim()));
+
+            if (sequence.length < 2) {
+                alert("Please enter at least 2 GSI values.");
+                return;
+            }
+
+            const requestData = {
+                sequence: sequence
+            };
+
+            fetch('/predict_lstm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('lstm-result');
+                if (data.error) {
+                    resultDiv.innerHTML = `Error: ${data.error}`;
+                } else {
+                    resultDiv.innerHTML = `Predicted Irradiance: ${data.predicted_irradiance} ${data.units}`;
+                }
+            })
+            .catch(error => {
+                console.error("Error during LSTM prediction:", error);
+            });
+        }
+    </script>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+#cnn-section, #lstm-section {
+    margin-bottom: 20px;
+}
+
+input[type="file"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+</style>
+
+</body>
+</html>
