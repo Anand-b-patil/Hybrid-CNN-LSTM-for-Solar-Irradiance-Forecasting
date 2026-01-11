@@ -40,6 +40,7 @@ except Exception:
 from scripts.EfficientNet import EfficientNetRegression
 from scripts.lstm_model import SolarLSTMForecasting, HybridCNNLSTM
 from scripts.preprocess import IRImageProcessor
+from scripts.gemini_service import get_gemini_service
 
 # Configure structured logging
 logging.basicConfig(
@@ -133,6 +134,74 @@ class HybridResponse(BaseModel):
     forecast_horizon: int = Field(..., description="Number of future time steps predicted")
     timestamp: str = Field(..., description="Prediction timestamp (ISO format)")
     model: str = Field(..., description="Model used for prediction")
+
+
+class AIExplanationRequest(BaseModel):
+    """Request model for AI explanation"""
+    prediction_data: dict = Field(..., description="Prediction data to explain")
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "prediction_data": {
+                    "nowcast_irradiance": 456.7,
+                    "timestamp": "2026-01-11T12:00:00",
+                    "model": "CNN_Regression"
+                }
+            }
+        }
+
+
+class AIRecommendationRequest(BaseModel):
+    """Request model for AI recommendations"""
+    prediction_data: dict = Field(..., description="Prediction data for recommendations")
+    user_context: Optional[str] = Field(None, description="User context (e.g., 'solar farm', 'residential')")
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "prediction_data": {
+                    "forecast_irradiance": [450.2, 478.5, 490.1, 502.3],
+                    "forecast_horizon": 4
+                },
+                "user_context": "residential solar system"
+            }
+        }
+
+
+class AITrendAnalysisRequest(BaseModel):
+    """Request model for trend analysis"""
+    historical_data: List[float] = Field(..., description="Historical irradiance values", min_items=5)
+    forecast_data: Optional[List[float]] = Field(None, description="Optional forecast values")
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "historical_data": [450.2, 478.5, 490.1, 502.3, 515.7, 530.2],
+                "forecast_data": [545.8, 560.1, 575.3, 590.5]
+            }
+        }
+
+
+class AIQuestionRequest(BaseModel):
+    """Request model for AI Q&A"""
+    question: str = Field(..., description="User's question about solar forecasting", min_length=5)
+    context_data: Optional[dict] = Field(None, description="Optional context data")
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "question": "What does an irradiance value of 500 W/m² mean for my solar panels?",
+                "context_data": {"current_irradiance": 500}
+            }
+        }
+
+
+class AIResponse(BaseModel):
+    """Response model for AI-generated content"""
+    content: str = Field(..., description="AI-generated content")
+    timestamp: str = Field(..., description="Response timestamp")
+    model: str = Field(..., description="AI model used")
 
 
 class HealthResponse(BaseModel):
@@ -285,6 +354,27 @@ class SolarForecastingAPI:
 
 
 api = SolarForecastingAPI()
+
+# Initialize Gemini AI Service
+gemini_service = None
+try:
+    gemini_api_key = getattr(settings, 'GEMINI_API_KEY', '')
+    if gemini_api_key:
+        gemini_service = get_gemini_service(
+            api_key=gemini_api_key,
+            model_name=getattr(settings, 'GEMINI_MODEL', 'gemini-1.5-flash'),
+            temperature=getattr(settings, 'GEMINI_TEMPERATURE', 0.7),
+            max_tokens=getattr(settings, 'GEMINI_MAX_TOKENS', 2048)
+        )
+        if gemini_service:
+            logger.info("Gemini AI Service initialized successfully")
+        else:
+            logger.warning("Gemini AI Service initialization failed")
+    else:
+        logger.warning("GEMINI_API_KEY not set - AI features will be disabled")
+except Exception as e:
+    logger.error(f"Failed to initialize Gemini service: {e}")
+    gemini_service = None
 
 
 def _validate_file_extension(filename: str) -> bool:
@@ -557,6 +647,218 @@ async def training_data():
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to retrieve training data: {str(e)}"
+        )
+
+
+# ==================== GEMINI AI ENDPOINTS ====================
+
+@app.post(
+    '/ai/explain',
+    response_model=AIResponse,
+    tags=["AI Insights"],
+    summary="Get AI explanation of prediction",
+    description="Generate natural language explanation of prediction results using Gemini AI."
+)
+async def ai_explain_prediction(req: AIExplanationRequest):
+    """AI endpoint: Explain prediction results in natural language"""
+    if not gemini_service:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Gemini AI service not available. Check GEMINI_API_KEY configuration."
+        )
+    
+    try:
+        logger.info(f"Generating AI explanation for prediction")
+        explanation = gemini_service.explain_prediction(req.prediction_data)
+        
+        return JSONResponse({
+            'content': explanation,
+            'timestamp': datetime.now().isoformat(),
+            'model': getattr(settings, 'GEMINI_MODEL', 'gemini-1.5-flash')
+        })
+    
+    except Exception as e:
+        logger.error(f"Error generating explanation: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to generate explanation: {str(e)}"
+        )
+
+
+@app.post(
+    '/ai/recommend',
+    response_model=AIResponse,
+    tags=["AI Insights"],
+    summary="Get AI recommendations",
+    description="Generate actionable recommendations based on prediction data using Gemini AI."
+)
+async def ai_get_recommendations(req: AIRecommendationRequest):
+    """AI endpoint: Get actionable recommendations based on predictions"""
+    if not gemini_service:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Gemini AI service not available. Check GEMINI_API_KEY configuration."
+        )
+    
+    try:
+        logger.info(f"Generating AI recommendations")
+        recommendations = gemini_service.get_recommendations(
+            req.prediction_data,
+            req.user_context
+        )
+        
+        return JSONResponse({
+            'content': recommendations,
+            'timestamp': datetime.now().isoformat(),
+            'model': getattr(settings, 'GEMINI_MODEL', 'gemini-1.5-flash')
+        })
+    
+    except Exception as e:
+        logger.error(f"Error generating recommendations: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to generate recommendations: {str(e)}"
+        )
+
+
+@app.post(
+    '/ai/analyze-trends',
+    response_model=AIResponse,
+    tags=["AI Insights"],
+    summary="Analyze irradiance trends",
+    description="Analyze historical and forecast trends using Gemini AI to identify patterns."
+)
+async def ai_analyze_trends(req: AITrendAnalysisRequest):
+    """AI endpoint: Analyze trends in irradiance data"""
+    if not gemini_service:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Gemini AI service not available. Check GEMINI_API_KEY configuration."
+        )
+    
+    try:
+        logger.info(f"Analyzing trends with AI")
+        analysis = gemini_service.analyze_trends(
+            req.historical_data,
+            req.forecast_data
+        )
+        
+        return JSONResponse({
+            'content': analysis,
+            'timestamp': datetime.now().isoformat(),
+            'model': getattr(settings, 'GEMINI_MODEL', 'gemini-1.5-flash')
+        })
+    
+    except Exception as e:
+        logger.error(f"Error analyzing trends: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to analyze trends: {str(e)}"
+        )
+
+
+@app.post(
+    '/ai/ask',
+    response_model=AIResponse,
+    tags=["AI Insights"],
+    summary="Ask AI about solar forecasting",
+    description="Ask questions about solar irradiance, forecasting, or the predictions using Gemini AI."
+)
+async def ai_answer_question(req: AIQuestionRequest):
+    """AI endpoint: Answer user questions about solar forecasting"""
+    if not gemini_service:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Gemini AI service not available. Check GEMINI_API_KEY configuration."
+        )
+    
+    try:
+        logger.info(f"Answering question with AI: {req.question[:50]}...")
+        answer = gemini_service.answer_question(
+            req.question,
+            req.context_data
+        )
+        
+        return JSONResponse({
+            'content': answer,
+            'timestamp': datetime.now().isoformat(),
+            'model': getattr(settings, 'GEMINI_MODEL', 'gemini-1.5-flash')
+        })
+    
+    except Exception as e:
+        logger.error(f"Error answering question: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to answer question: {str(e)}"
+        )
+
+
+@app.post(
+    '/ai/smart-predict',
+    tags=["AI Insights"],
+    summary="Get prediction with AI insights",
+    description="Combine nowcasting prediction with AI-powered explanation and recommendations."
+)
+async def ai_smart_predict(file: UploadFile = File(..., description="Infrared sky image")):
+    """Smart prediction: Get nowcast with AI explanation and recommendations"""
+    if not file or not file.filename:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No file uploaded or filename is empty"
+        )
+
+    filename = secure_filename(file.filename)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_{filename}"
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
+
+    try:
+        await _save_upload_file(file, filepath)
+        logger.info(f"Processing smart prediction with AI: {filename}")
+        
+        # Get prediction
+        prediction = api.nowcast_single_image(filepath)
+        
+        # Generate AI insights if available
+        ai_insights = {}
+        if gemini_service:
+            try:
+                explanation = gemini_service.explain_prediction(prediction)
+                recommendations = gemini_service.get_recommendations(prediction)
+                ai_insights = {
+                    'explanation': explanation,
+                    'recommendations': recommendations
+                }
+            except Exception as e:
+                logger.warning(f"AI insights generation failed: {e}")
+                ai_insights = {
+                    'explanation': 'AI explanation not available',
+                    'recommendations': 'AI recommendations not available'
+                }
+        
+        # Cleanup
+        if os.path.exists(filepath):
+            os.remove(filepath)
+        
+        result = {
+            'prediction': prediction,
+            'ai_insights': ai_insights,
+            'timestamp': datetime.now().isoformat()
+        }
+        
+        logger.info(f"Smart prediction successful: {prediction['nowcast_irradiance']} W/m²")
+        return JSONResponse(result)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        # Cleanup on error
+        if os.path.exists(filepath):
+            os.remove(filepath)
+        logger.error(f"Error in smart prediction: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Smart prediction failed: {str(e)}"
         )
 
 

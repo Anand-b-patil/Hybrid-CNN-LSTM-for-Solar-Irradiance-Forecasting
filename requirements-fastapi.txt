@@ -10,6 +10,9 @@ python-multipart==0.0.20
 pydantic==2.10.5
 pydantic-settings==2.7.1
 
+# AI Integration
+google-generativeai==0.8.5
+
 # Deep Learning
 torch==2.5.1
 torchvision==0.20.1
