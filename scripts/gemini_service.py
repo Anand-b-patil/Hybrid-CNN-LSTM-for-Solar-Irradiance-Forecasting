@@ -8,11 +8,19 @@ from datetime import datetime
 import json
 
 try:
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types
     GEMINI_AVAILABLE = True
 except ImportError:
-    GEMINI_AVAILABLE = False
-    genai = None
+    try:
+        # Fallback to old package if new one not available
+        import google.generativeai as genai
+        types = None
+        GEMINI_AVAILABLE = True
+    except ImportError:
+        GEMINI_AVAILABLE = False
+        genai = None
+        types = None
 
 logger = logging.getLogger(__name__)
 
@@ -20,21 +28,21 @@ logger = logging.getLogger(__name__)
 class GeminiAIService:
     """Service class for integrating Google Gemini AI with solar forecasting"""
     
-    def __init__(self, api_key: str, model_name: str = "gemini-1.5-flash", 
+    def __init__(self, api_key: str, model_name: str = "gemini-2.0-flash-exp", 
                  temperature: float = 0.7, max_tokens: int = 2048):
         """
         Initialize Gemini AI Service
         
         Args:
             api_key: Google AI API key
-            model_name: Gemini model to use (gemini-1.5-flash or gemini-1.5-pro)
+            model_name: Gemini model to use (gemini-2.0-flash-exp, gemini-1.5-flash, gemini-1.5-pro)
             temperature: Sampling temperature (0.0-1.0)
             max_tokens: Maximum tokens in response
         """
         if not GEMINI_AVAILABLE:
             raise ImportError(
-                "google-generativeai package not installed. "
-                "Install with: pip install google-generativeai"
+                "Google Genai package not installed. "
+                "Install with: pip install google-genai"
             )
         
         if not api_key:
@@ -47,44 +55,80 @@ class GeminiAIService:
         self.model_name = model_name
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.use_new_api = types is not None
         
-        # Configure Gemini
-        genai.configure(api_key=api_key)
-        
-        # Initialize model with safety settings
-        self.generation_config = {
-            "temperature": temperature,
-            "top_p": 0.95,
-            "top_k": 40,
-            "max_output_tokens": max_tokens,
-        }
-        
-        self.safety_settings = [
-            {
-                "category": "HARM_CATEGORY_HARASSMENT",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-            },
-            {
-                "category": "HARM_CATEGORY_HATE_SPEECH",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-            },
-            {
-                "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-            },
-            {
-                "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-            },
-        ]
-        
-        self.model = genai.GenerativeModel(
-            model_name=model_name,
-            generation_config=self.generation_config,
-            safety_settings=self.safety_settings
-        )
+        # Configure Gemini - use new API if available
+        if self.use_new_api:
+            # New google.genai API
+            self.client = genai.Client(api_key=api_key)
+            logger.info(f"Using new google.genai API with model: {model_name}")
+        else:
+            # Old google.generativeai API (deprecated)
+            genai.configure(api_key=api_key)
+            
+            # Initialize model with safety settings for old API
+            self.generation_config = {
+                "temperature": temperature,
+                "top_p": 0.95,
+                "top_k": 40,
+                "max_output_tokens": max_tokens,
+            }
+            
+            self.safety_settings = [
+                {
+                    "category": "HARM_CATEGORY_HARASSMENT",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+                {
+                    "category": "HARM_CATEGORY_HATE_SPEECH",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+                {
+                    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+                {
+                    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+            ]
+            
+            self.model = genai.GenerativeModel(
+                model_name=model_name,
+                generation_config=self.generation_config,
+                safety_settings=self.safety_settings
+            )
+            logger.warning("Using deprecated google.generativeai API - consider upgrading to google.genai")
         
         logger.info(f"Gemini AI Service initialized with model: {model_name}")
+    
+    def _generate_content(self, prompt: str) -> str:
+        """
+        Generate content using appropriate API
+        
+        Args:
+            prompt: The prompt to send to the model
+            
+        Returns:
+            Generated text response
+        """
+        if self.use_new_api:
+            # Use new google.genai API
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    temperature=self.temperature,
+                    max_output_tokens=self.max_tokens,
+                    top_p=0.95,
+                    top_k=40
+                )
+            )
+            return response.text.strip()
+        else:
+            # Use old google.generativeai API
+            response = self.model.generate_content(prompt)
+            return response.text.strip()
     
     def _create_system_context(self) -> str:
         """Create system context for solar forecasting domain"""
@@ -178,8 +222,7 @@ Provide a concise explanation that:
             else:
                 return "Unable to generate explanation: Invalid prediction data format"
             
-            response = self.model.generate_content(prompt)
-            return response.text.strip()
+            return self._generate_content(prompt)
         
         except Exception as e:
             logger.error(f"Error generating prediction explanation: {e}")
@@ -217,8 +260,7 @@ Generate specific, actionable recommendations that:
 
 Focus on what the user should DO with this information."""
             
-            response = self.model.generate_content(prompt)
-            return response.text.strip()
+            return self._generate_content(prompt)
         
         except Exception as e:
             logger.error(f"Error generating recommendations: {e}")
@@ -269,8 +311,7 @@ Provide analysis including:
 
 Be specific and data-driven."""
             
-            response = self.model.generate_content(prompt)
-            return response.text.strip()
+            return self._generate_content(prompt)
         
         except Exception as e:
             logger.error(f"Error analyzing trends: {e}")
@@ -307,8 +348,7 @@ Provide a clear, accurate answer that:
 
 Be helpful and informative."""
             
-            response = self.model.generate_content(prompt)
-            return response.text.strip()
+            return self._generate_content(prompt)
         
         except Exception as e:
             logger.error(f"Error answering question: {e}")
@@ -349,8 +389,7 @@ Generate a professional summary report that includes:
 
 Format as a structured report suitable for stakeholders."""
             
-            response = self.model.generate_content(prompt)
-            return response.text.strip()
+            return self._generate_content(prompt)
         
         except Exception as e:
             logger.error(f"Error generating report: {e}")
@@ -361,7 +400,7 @@ Format as a structured report suitable for stakeholders."""
 _gemini_service_instance: Optional[GeminiAIService] = None
 
 
-def get_gemini_service(api_key: str, model_name: str = "gemini-1.5-flash",
+def get_gemini_service(api_key: str, model_name: str = "gemini-2.0-flash-exp",
                        temperature: float = 0.7, max_tokens: int = 2048) -> Optional[GeminiAIService]:
     """
     Get or create Gemini AI service instance
