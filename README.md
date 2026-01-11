@@ -164,7 +164,7 @@ python scripts/preprocess.py
 python notebooks/train_hybrid_model.py
 
 # Step 3: Launch Flask Web App
-python app/app.py
+python python -m uvicorn Fast_api_app:app --reload --host 127.0.0.1 --port 5000
 ```
 
 > The dashboard will be available at: **[http://localhost:5000](http://localhost:5000)**

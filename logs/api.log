@@ -1,0 +1,216 @@
+2025-12-23 09:28:00,087 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:28:00,093 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:28:02,016 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:28:02,023 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:28:02,194 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:28:02,196 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:28:02,516 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:32:48,438 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:32:48,440 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:32:49,671 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:32:49,673 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:32:49,827 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:32:49,828 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:32:50,114 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:33:08,743 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:33:08,744 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:33:09,181 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:33:09,182 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:33:09,203 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:33:09,203 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:33:09,279 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:33:24,720 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:33:24,721 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:33:25,181 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:33:25,182 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:33:25,205 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:33:25,205 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:33:25,274 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:34:07,711 - Fast_api_app - INFO - File saved: uploads\20251223_093407_1547579790IR.png (6796 bytes)
+2025-12-23 09:34:07,715 - Fast_api_app - INFO - Processing single image prediction: 20251223_093407_1547579790IR.png
+2025-12-23 09:34:08,472 - Fast_api_app - INFO - Prediction successful: 56.32 W/m²
+2025-12-23 09:34:30,810 - Fast_api_app - INFO - File saved: uploads\20251223_093430_1547585685IR.png (7303 bytes)
+2025-12-23 09:34:30,820 - Fast_api_app - INFO - Processing single image prediction: 20251223_093430_1547585685IR.png
+2025-12-23 09:34:31,239 - Fast_api_app - INFO - Prediction successful: 56.13 W/m²
+2025-12-23 09:34:38,568 - Fast_api_app - INFO - File saved: uploads\20251223_093438_1547579835IR.png (6819 bytes)
+2025-12-23 09:34:38,576 - Fast_api_app - INFO - Processing single image prediction: 20251223_093438_1547579835IR.png
+2025-12-23 09:34:38,953 - Fast_api_app - INFO - Prediction successful: 55.36 W/m²
+2025-12-23 09:35:24,817 - Fast_api_app - INFO - File saved: uploads\20251223_093524_1547578080IR.png (58957 bytes)
+2025-12-23 09:35:24,819 - Fast_api_app - INFO - Processing single image prediction: 20251223_093524_1547578080IR.png
+2025-12-23 09:35:25,527 - Fast_api_app - INFO - Prediction successful: 45.1 W/m²
+2025-12-23 09:37:17,865 - Fast_api_app - INFO - File saved: uploads\20251223_093717_1547569650IR.png (5075 bytes)
+2025-12-23 09:37:17,866 - Fast_api_app - INFO - Processing single image prediction: 20251223_093717_1547569650IR.png
+2025-12-23 09:37:18,419 - Fast_api_app - INFO - Prediction successful: 53.72 W/m²
+2025-12-23 09:37:36,159 - Fast_api_app - INFO - Processing hybrid prediction with 15 images
+2025-12-23 09:37:36,164 - Fast_api_app - INFO - File saved: uploads\20251223_093736_000_1547567085IR.png (5294 bytes)
+2025-12-23 09:37:36,168 - Fast_api_app - INFO - File saved: uploads\20251223_093736_001_1547567100IR.png (5329 bytes)
+2025-12-23 09:37:36,171 - Fast_api_app - INFO - File saved: uploads\20251223_093736_002_1547567115IR.png (5356 bytes)
+2025-12-23 09:37:36,177 - Fast_api_app - INFO - File saved: uploads\20251223_093736_003_1547567130IR.png (5413 bytes)
+2025-12-23 09:37:36,183 - Fast_api_app - INFO - File saved: uploads\20251223_093736_004_1547567145IR.png (5470 bytes)
+2025-12-23 09:37:36,185 - Fast_api_app - INFO - File saved: uploads\20251223_093736_005_1547567160IR.png (5409 bytes)
+2025-12-23 09:37:36,190 - Fast_api_app - INFO - File saved: uploads\20251223_093736_006_1547567175IR.png (5329 bytes)
+2025-12-23 09:37:36,209 - Fast_api_app - INFO - File saved: uploads\20251223_093736_007_1547567190IR.png (5276 bytes)
+2025-12-23 09:37:36,216 - Fast_api_app - INFO - File saved: uploads\20251223_093736_008_1547567205IR.png (5316 bytes)
+2025-12-23 09:37:36,220 - Fast_api_app - INFO - File saved: uploads\20251223_093736_009_1547567220IR.png (5297 bytes)
+2025-12-23 09:37:36,236 - Fast_api_app - INFO - File saved: uploads\20251223_093736_010_1547567235IR.png (5270 bytes)
+2025-12-23 09:37:36,244 - Fast_api_app - INFO - File saved: uploads\20251223_093736_011_1547567250IR.png (5251 bytes)
+2025-12-23 09:37:36,246 - Fast_api_app - INFO - File saved: uploads\20251223_093736_012_1547567265IR.png (5220 bytes)
+2025-12-23 09:37:36,249 - Fast_api_app - INFO - File saved: uploads\20251223_093736_013_1547567280IR.png (5250 bytes)
+2025-12-23 09:37:36,259 - Fast_api_app - INFO - File saved: uploads\20251223_093736_014_1547567295IR.png (5317 bytes)
+2025-12-23 09:37:40,889 - Fast_api_app - INFO - Hybrid prediction successful: 4 steps forecasted
+2025-12-23 09:38:22,800 - Fast_api_app - INFO - Processing forecast for sequence of length 14
+2025-12-23 09:38:22,818 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2025-12-23 09:40:13,969 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:40:13,970 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:40:14,303 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:40:14,303 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:40:14,329 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:40:14,329 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:40:14,407 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:41:15,283 - Fast_api_app - INFO - Processing forecast for sequence of length 14
+2025-12-23 09:41:15,303 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2025-12-23 09:44:53,207 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:44:53,209 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:44:54,435 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:44:54,437 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:44:54,493 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:44:54,494 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:44:54,710 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:45:22,099 - Fast_api_app - INFO - Using device: cpu
+2025-12-23 09:45:22,101 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2025-12-23 09:45:23,294 - Fast_api_app - INFO - CNN model loaded successfully
+2025-12-23 09:45:23,296 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2025-12-23 09:45:23,354 - Fast_api_app - INFO - LSTM model loaded successfully
+2025-12-23 09:45:23,355 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2025-12-23 09:45:23,580 - Fast_api_app - INFO - Hybrid model loaded successfully
+2025-12-23 09:46:56,914 - Fast_api_app - INFO - Processing forecast for sequence of length 20
+2025-12-23 09:46:56,928 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2026-01-07 22:58:00,231 - Fast_api_app - INFO - Using device: cpu
+2026-01-07 22:58:00,232 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2026-01-07 22:58:00,751 - Fast_api_app - INFO - CNN model loaded successfully
+2026-01-07 22:58:00,752 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2026-01-07 22:58:00,843 - Fast_api_app - INFO - LSTM model loaded successfully
+2026-01-07 22:58:00,844 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2026-01-07 22:58:00,964 - Fast_api_app - INFO - Hybrid model loaded successfully
+2026-01-07 22:58:41,202 - Fast_api_app - INFO - File saved: uploads\20260107_225841_1547579805IR.png (6765 bytes)
+2026-01-07 22:58:41,205 - Fast_api_app - INFO - Processing single image prediction: 20260107_225841_1547579805IR.png
+2026-01-07 22:58:42,703 - Fast_api_app - INFO - Prediction successful: 56.33 W/m²
+2026-01-07 22:58:51,689 - Fast_api_app - INFO - Processing forecast for sequence of length 20
+2026-01-07 22:58:52,331 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2026-01-07 22:59:09,834 - Fast_api_app - INFO - Processing hybrid prediction with 33 images
+2026-01-07 22:59:09,864 - Fast_api_app - INFO - File saved: uploads\20260107_225909_000_1547579790IR.png (6796 bytes)
+2026-01-07 22:59:09,904 - Fast_api_app - INFO - File saved: uploads\20260107_225909_001_1547579805IR.png (6765 bytes)
+2026-01-07 22:59:09,930 - Fast_api_app - INFO - File saved: uploads\20260107_225909_002_1547579820IR.png (6739 bytes)
+2026-01-07 22:59:09,945 - Fast_api_app - INFO - File saved: uploads\20260107_225909_003_1547579835IR.png (6819 bytes)
+2026-01-07 22:59:09,970 - Fast_api_app - INFO - File saved: uploads\20260107_225909_004_1547579850IR.png (6708 bytes)
+2026-01-07 22:59:10,006 - Fast_api_app - INFO - File saved: uploads\20260107_225909_005_1547579865IR.png (6682 bytes)
+2026-01-07 22:59:10,032 - Fast_api_app - INFO - File saved: uploads\20260107_225909_006_1547579880IR.png (6720 bytes)
+2026-01-07 22:59:10,039 - Fast_api_app - INFO - File saved: uploads\20260107_225909_007_1547579895IR.png (6718 bytes)
+2026-01-07 22:59:10,067 - Fast_api_app - INFO - File saved: uploads\20260107_225909_008_1547579910IR.png (6785 bytes)
+2026-01-07 22:59:10,084 - Fast_api_app - INFO - File saved: uploads\20260107_225909_009_1547579955IR.png (6777 bytes)
+2026-01-07 22:59:10,103 - Fast_api_app - INFO - File saved: uploads\20260107_225909_010_1547579970IR.png (6751 bytes)
+2026-01-07 22:59:10,108 - Fast_api_app - INFO - File saved: uploads\20260107_225909_011_1547579985IR.png (6727 bytes)
+2026-01-07 22:59:10,137 - Fast_api_app - INFO - File saved: uploads\20260107_225909_012_1547580000IR.png (6672 bytes)
+2026-01-07 22:59:10,172 - Fast_api_app - INFO - File saved: uploads\20260107_225909_013_1547580015IR.png (6717 bytes)
+2026-01-07 22:59:10,227 - Fast_api_app - INFO - File saved: uploads\20260107_225909_014_1547580030IR.png (6702 bytes)
+2026-01-07 22:59:10,278 - Fast_api_app - INFO - File saved: uploads\20260107_225909_015_1547580045IR.png (6776 bytes)
+2026-01-07 22:59:10,317 - Fast_api_app - INFO - File saved: uploads\20260107_225909_016_1547580060IR.png (6768 bytes)
+2026-01-07 22:59:10,339 - Fast_api_app - INFO - File saved: uploads\20260107_225909_017_1547580075IR.png (6596 bytes)
+2026-01-07 22:59:10,367 - Fast_api_app - INFO - File saved: uploads\20260107_225909_018_1547580120IR.png (6678 bytes)
+2026-01-07 22:59:10,386 - Fast_api_app - INFO - File saved: uploads\20260107_225909_019_1547580135IR.png (6619 bytes)
+2026-01-07 22:59:10,403 - Fast_api_app - INFO - File saved: uploads\20260107_225909_020_1547580150IR.png (6601 bytes)
+2026-01-07 22:59:10,406 - Fast_api_app - INFO - File saved: uploads\20260107_225909_021_1547580165IR.png (6549 bytes)
+2026-01-07 22:59:10,427 - Fast_api_app - INFO - File saved: uploads\20260107_225909_022_1547580180IR.png (6608 bytes)
+2026-01-07 22:59:10,437 - Fast_api_app - INFO - File saved: uploads\20260107_225909_023_1547580195IR.png (6663 bytes)
+2026-01-07 22:59:10,450 - Fast_api_app - INFO - File saved: uploads\20260107_225909_024_1547580210IR.png (6601 bytes)
+2026-01-07 22:59:10,469 - Fast_api_app - INFO - File saved: uploads\20260107_225909_025_1547580225IR.png (6610 bytes)
+2026-01-07 22:59:10,487 - Fast_api_app - INFO - File saved: uploads\20260107_225909_026_1547580240IR.png (6624 bytes)
+2026-01-07 22:59:10,513 - Fast_api_app - INFO - File saved: uploads\20260107_225909_027_1547585610IR.png (7302 bytes)
+2026-01-07 22:59:10,537 - Fast_api_app - INFO - File saved: uploads\20260107_225909_028_1547585625IR.png (7299 bytes)
+2026-01-07 22:59:10,552 - Fast_api_app - INFO - File saved: uploads\20260107_225909_029_1547585640IR.png (7334 bytes)
+2026-01-07 22:59:10,588 - Fast_api_app - INFO - File saved: uploads\20260107_225909_030_1547585655IR.png (7226 bytes)
+2026-01-07 22:59:10,601 - Fast_api_app - INFO - File saved: uploads\20260107_225909_031_1547585670IR.png (7234 bytes)
+2026-01-07 22:59:10,604 - Fast_api_app - INFO - File saved: uploads\20260107_225909_032_1547585685IR.png (7303 bytes)
+2026-01-07 22:59:21,136 - Fast_api_app - INFO - Hybrid prediction successful: 4 steps forecasted
+2026-01-08 21:34:17,034 - Fast_api_app - INFO - Using device: cpu
+2026-01-08 21:34:17,036 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2026-01-08 21:34:17,443 - Fast_api_app - INFO - CNN model loaded successfully
+2026-01-08 21:34:17,443 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2026-01-08 21:34:17,462 - Fast_api_app - INFO - LSTM model loaded successfully
+2026-01-08 21:34:17,462 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2026-01-08 21:34:17,542 - Fast_api_app - INFO - Hybrid model loaded successfully
+2026-01-08 21:34:54,994 - Fast_api_app - INFO - File saved: uploads\20260108_213454_1547579790IR.png (6796 bytes)
+2026-01-08 21:34:54,997 - Fast_api_app - INFO - Processing single image prediction: 20260108_213454_1547579790IR.png
+2026-01-08 21:34:55,666 - Fast_api_app - INFO - Prediction successful: 56.32 W/m²
+2026-01-08 21:35:07,385 - Fast_api_app - INFO - Processing forecast for sequence of length 20
+2026-01-08 21:35:07,401 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2026-01-08 21:35:21,695 - Fast_api_app - INFO - Processing hybrid prediction with 10 images
+2026-01-08 21:35:21,699 - Fast_api_app - INFO - File saved: uploads\20260108_213521_000_1547579790IR.png (6796 bytes)
+2026-01-08 21:35:21,705 - Fast_api_app - INFO - File saved: uploads\20260108_213521_001_1547579805IR.png (6765 bytes)
+2026-01-08 21:35:21,711 - Fast_api_app - INFO - File saved: uploads\20260108_213521_002_1547579820IR.png (6739 bytes)
+2026-01-08 21:35:21,713 - Fast_api_app - INFO - File saved: uploads\20260108_213521_003_1547579835IR.png (6819 bytes)
+2026-01-08 21:35:21,717 - Fast_api_app - INFO - File saved: uploads\20260108_213521_004_1547579850IR.png (6708 bytes)
+2026-01-08 21:35:21,719 - Fast_api_app - INFO - File saved: uploads\20260108_213521_005_1547579865IR.png (6682 bytes)
+2026-01-08 21:35:21,723 - Fast_api_app - INFO - File saved: uploads\20260108_213521_006_1547579880IR.png (6720 bytes)
+2026-01-08 21:35:21,725 - Fast_api_app - INFO - File saved: uploads\20260108_213521_007_1547579895IR.png (6718 bytes)
+2026-01-08 21:35:21,728 - Fast_api_app - INFO - File saved: uploads\20260108_213521_008_1547579910IR.png (6785 bytes)
+2026-01-08 21:35:21,736 - Fast_api_app - INFO - File saved: uploads\20260108_213521_009_1547579955IR.png (6777 bytes)
+2026-01-08 21:35:24,263 - Fast_api_app - INFO - Hybrid prediction successful: 4 steps forecasted
+2026-01-09 06:06:42,865 - Fast_api_app - INFO - Using device: cpu
+2026-01-09 06:06:42,866 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2026-01-09 06:06:43,399 - Fast_api_app - INFO - CNN model loaded successfully
+2026-01-09 06:06:43,400 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2026-01-09 06:06:43,476 - Fast_api_app - INFO - LSTM model loaded successfully
+2026-01-09 06:06:43,476 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2026-01-09 06:06:43,563 - Fast_api_app - INFO - Hybrid model loaded successfully
+2026-01-09 06:09:22,137 - Fast_api_app - INFO - File saved: uploads\20260109_060922_1547579790IR.png (6796 bytes)
+2026-01-09 06:09:22,138 - Fast_api_app - INFO - Processing single image prediction: 20260109_060922_1547579790IR.png
+2026-01-09 06:09:22,777 - Fast_api_app - INFO - Prediction successful: 56.32 W/m²
+2026-01-09 06:10:31,938 - Fast_api_app - INFO - File saved: uploads\20260109_061031_1547579790IR.png (6796 bytes)
+2026-01-09 06:10:31,939 - Fast_api_app - INFO - Processing single image prediction: 20260109_061031_1547579790IR.png
+2026-01-09 06:10:32,112 - Fast_api_app - INFO - Prediction successful: 56.32 W/m²
+2026-01-09 06:11:37,202 - Fast_api_app - INFO - Processing forecast for sequence of length 10
+2026-01-09 06:11:37,270 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2026-01-09 11:13:03,262 - Fast_api_app - INFO - Using device: cpu
+2026-01-09 11:13:03,265 - Fast_api_app - INFO - Loading CNN nowcasting model...
+2026-01-09 11:13:03,738 - Fast_api_app - INFO - CNN model loaded successfully
+2026-01-09 11:13:03,738 - Fast_api_app - INFO - Loading LSTM forecasting model...
+2026-01-09 11:13:03,827 - Fast_api_app - INFO - LSTM model loaded successfully
+2026-01-09 11:13:03,827 - Fast_api_app - INFO - Loading hybrid CNN-LSTM model...
+2026-01-09 11:13:03,933 - Fast_api_app - INFO - Hybrid model loaded successfully
+2026-01-09 11:13:25,466 - Fast_api_app - INFO - File saved: uploads\20260109_111325_1547579790IR.png (6796 bytes)
+2026-01-09 11:13:25,470 - Fast_api_app - INFO - Processing single image prediction: 20260109_111325_1547579790IR.png
+2026-01-09 11:13:26,239 - Fast_api_app - INFO - Prediction successful: 56.32 W/m²
+2026-01-09 11:13:37,869 - Fast_api_app - INFO - Processing forecast for sequence of length 20
+2026-01-09 11:13:37,970 - Fast_api_app - INFO - Forecast successful: 4 steps predicted
+2026-01-09 11:13:54,501 - Fast_api_app - INFO - Processing hybrid prediction with 20 images
+2026-01-09 11:13:54,511 - Fast_api_app - INFO - File saved: uploads\20260109_111354_000_1547579790IR.png (6796 bytes)
+2026-01-09 11:13:54,534 - Fast_api_app - INFO - File saved: uploads\20260109_111354_001_1547579805IR.png (6765 bytes)
+2026-01-09 11:13:54,546 - Fast_api_app - INFO - File saved: uploads\20260109_111354_002_1547579820IR.png (6739 bytes)
+2026-01-09 11:13:54,558 - Fast_api_app - INFO - File saved: uploads\20260109_111354_003_1547579835IR.png (6819 bytes)
+2026-01-09 11:13:54,569 - Fast_api_app - INFO - File saved: uploads\20260109_111354_004_1547579850IR.png (6708 bytes)
+2026-01-09 11:13:54,583 - Fast_api_app - INFO - File saved: uploads\20260109_111354_005_1547579865IR.png (6682 bytes)
+2026-01-09 11:13:54,587 - Fast_api_app - INFO - File saved: uploads\20260109_111354_006_1547579880IR.png (6720 bytes)
+2026-01-09 11:13:54,611 - Fast_api_app - INFO - File saved: uploads\20260109_111354_007_1547579895IR.png (6718 bytes)
+2026-01-09 11:13:54,620 - Fast_api_app - INFO - File saved: uploads\20260109_111354_008_1547579910IR.png (6785 bytes)
+2026-01-09 11:13:54,633 - Fast_api_app - INFO - File saved: uploads\20260109_111354_009_1547579955IR.png (6777 bytes)
+2026-01-09 11:13:54,641 - Fast_api_app - INFO - File saved: uploads\20260109_111354_010_1547579970IR.png (6751 bytes)
+2026-01-09 11:13:54,653 - Fast_api_app - INFO - File saved: uploads\20260109_111354_011_1547579985IR.png (6727 bytes)
+2026-01-09 11:13:54,663 - Fast_api_app - INFO - File saved: uploads\20260109_111354_012_1547580000IR.png (6672 bytes)
+2026-01-09 11:13:54,671 - Fast_api_app - INFO - File saved: uploads\20260109_111354_013_1547580015IR.png (6717 bytes)
+2026-01-09 11:13:54,684 - Fast_api_app - INFO - File saved: uploads\20260109_111354_014_1547580030IR.png (6702 bytes)
+2026-01-09 11:13:54,692 - Fast_api_app - INFO - File saved: uploads\20260109_111354_015_1547580045IR.png (6776 bytes)
+2026-01-09 11:13:54,702 - Fast_api_app - INFO - File saved: uploads\20260109_111354_016_1547580060IR.png (6768 bytes)
+2026-01-09 11:13:54,712 - Fast_api_app - INFO - File saved: uploads\20260109_111354_017_1547580075IR.png (6596 bytes)
+2026-01-09 11:13:54,719 - Fast_api_app - INFO - File saved: uploads\20260109_111354_018_1547580120IR.png (6678 bytes)
+2026-01-09 11:13:54,730 - Fast_api_app - INFO - File saved: uploads\20260109_111354_019_1547580135IR.png (6619 bytes)
+2026-01-09 11:14:03,452 - Fast_api_app - INFO - Hybrid prediction successful: 4 steps forecasted
+2026-01-09 12:18:07,840 - Fast_api_app - INFO - File saved: uploads\20260109_121807_1547579790IR.png (6796 bytes)
+2026-01-09 12:18:07,846 - Fast_api_app - INFO - Processing single image prediction: 20260109_121807_1547579790IR.png
+2026-01-09 12:18:08,448 - Fast_api_app - INFO - Prediction successful: 56.32 W/m²
+2026-01-09 12:22:01,481 - Fast_api_app - INFO - File saved: uploads\20260109_122201_1547579805IR.png (6765 bytes)
+2026-01-09 12:22:01,482 - Fast_api_app - INFO - Processing single image prediction: 20260109_122201_1547579805IR.png
+2026-01-09 12:22:01,848 - Fast_api_app - INFO - Prediction successful: 56.33 W/m²
+2026-01-09 16:11:59,124 - Fast_api_app - INFO - File saved: uploads\20260109_161159_1547579805IR.png (6765 bytes)
+2026-01-09 16:11:59,136 - Fast_api_app - INFO - Processing single image prediction: 20260109_161159_1547579805IR.png
+2026-01-09 16:12:00,621 - Fast_api_app - INFO - Prediction successful: 56.33 W/m²
