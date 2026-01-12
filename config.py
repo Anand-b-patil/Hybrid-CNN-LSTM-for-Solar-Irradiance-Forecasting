@@ -47,7 +47,7 @@ class Settings(BaseSettings):
     
     # Gemini AI Settings
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL: str = "gemini-1.5-flash"  # or "gemini-1.5-pro" for more advanced tasks
+    GEMINI_MODEL: str = "gemini-2.0-flash-exp"  # or "gemini-1.5-flash" or "gemini-1.5-pro"
     GEMINI_TEMPERATURE: float = 0.7
     GEMINI_MAX_TOKENS: int = 2048
     GEMINI_TIMEOUT: int = 30  # seconds

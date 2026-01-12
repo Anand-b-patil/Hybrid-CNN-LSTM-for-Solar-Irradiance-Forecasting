@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 class GeminiAIService:
     """Service class for integrating Google Gemini AI with solar forecasting"""
     
-    def __init__(self, api_key: str, model_name: str = "gemini-2.0-flash-exp", 
+    def __init__(self, api_key: str, model_name: str = "gemini-2.0-flash", 
                  temperature: float = 0.7, max_tokens: int = 2048):
         """
         Initialize Gemini AI Service

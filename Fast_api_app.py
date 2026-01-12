@@ -362,7 +362,7 @@ try:
     if gemini_api_key:
         gemini_service = get_gemini_service(
             api_key=gemini_api_key,
-            model_name=getattr(settings, 'GEMINI_MODEL', 'gemini-1.5-flash'),
+            model_name=getattr(settings, 'GEMINI_MODEL', 'gemini-2.0-flash'),
             temperature=getattr(settings, 'GEMINI_TEMPERATURE', 0.7),
             max_tokens=getattr(settings, 'GEMINI_MAX_TOKENS', 2048)
         )
