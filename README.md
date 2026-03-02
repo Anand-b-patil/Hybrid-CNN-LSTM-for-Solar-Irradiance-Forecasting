@@ -205,5 +205,5 @@ This project is licensed under the **MIT License** 📝
 
 **Anand Bhimagouda Patil**
 📧 [ap6272440@gmail.com](mailto:ap6272440@gmail.com)
-🔗 [GitHub](https://github.com/Anand-b-patil) | [LinkedIn](https://linkedin.com/in/anand_b_patil)
+🔗 [GitHub](https://github.com/Anand-b-patil) | [LinkedIn](https://linkedin.com/in/anand-b-patil)
 
